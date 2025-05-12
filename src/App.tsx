@@ -1,37 +1,45 @@
-import { useState } from "react";
-import { useGetUserByIdQuery } from "./graphql/generated";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React, { Suspense, type JSX } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router";
+import CircularProgress from "@mui/material/CircularProgress";
+import ROUTES from "./routes/routes";
+import { RoutePrefix, type RouteName } from "./routes/routes.interface";
+import { ThemeContextProvider } from "./contexts/ThemeContext";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const getAppRoutes = (): JSX.Element[] => {
+    const paths: JSX.Element[] = [];
+    for (const route in ROUTES) {
+      if (route in ROUTES) {
+        const { path, component } = ROUTES[route as RouteName];
 
-  const { data } = useGetUserByIdQuery({ id: 2 });
+        paths.push(
+          <Route
+            key={path}
+            path={path}
+            element={React.createElement(component)}
+          />
+        );
+      }
+    }
+    return paths;
+  };
+
+  // const { data } = useGetUserByIdQuery({ id: 2 });
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>{data?.user?.id}</p>
-        <p>{data?.user?.email}</p>
-        <p>{data?.user?.username}</p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Suspense fallback={<CircularProgress />}>
+      <ThemeContextProvider>
+        <Router>
+          <Routes>
+            {getAppRoutes()}
+            <Route
+              path="*"
+              element={<Navigate to={RoutePrefix.Home} replace />}
+            />
+          </Routes>
+        </Router>
+      </ThemeContextProvider>
+    </Suspense>
   );
 }
 
