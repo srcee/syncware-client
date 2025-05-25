@@ -1,7 +1,12 @@
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import {
+  createTheme,
+  responsiveFontSizes,
+  type PaletteMode,
+  type Theme,
+} from "@mui/material/styles";
 import { colors } from "./colors";
 
-const createCustomTheme = (mode: "light" | "dark") => {
+const createCustomTheme = (mode: PaletteMode): Theme => {
   return createTheme({
     palette: {
       mode,

@@ -7,6 +7,7 @@ export enum ColorsPalette {
   Black = "#000000",
   GreyText = "#666666",
   LighterGreyText = "#bbbbbb",
+  AuroMetalSaurus = "#698684",
 }
 
 export interface Color {
@@ -20,8 +21,12 @@ export interface Colors {
 
 export const colors: Colors = {
   "primary-button": {
-    light: ColorsPalette.PrimaryBlue,
+    light: ColorsPalette.AuroMetalSaurus,
     dark: ColorsPalette.DarkBlue,
+  },
+  "primary-button-text": {
+    light: ColorsPalette.BrightWhite,
+    dark: ColorsPalette.BrightWhite,
   },
   background: {
     light: ColorsPalette.LightGray,

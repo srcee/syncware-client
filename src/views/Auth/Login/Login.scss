@@ -1,0 +1,67 @@
+svg {
+  animation: fill 1s ease forwards 2.8s;
+}
+
+svg path {
+  stroke: #c07262;
+}
+
+svg path:nth-child(1) {
+  stroke-dasharray: 599;
+  stroke-dashoffset: 599;
+  animation: animate 2s ease forwards 1s;
+}
+
+svg path:nth-child(2) {
+  stroke-dasharray: 546;
+  stroke-dashoffset: 546;
+  animation: animate 2s ease forwards 0.8s;
+}
+
+svg path:nth-child(3) {
+  stroke-dasharray: 495;
+  stroke-dashoffset: 495;
+  animation: animate 2s ease forwards 0.6s;
+}
+
+svg path:nth-child(4) {
+  stroke-dasharray: 759;
+  stroke-dashoffset: 759;
+  animation: animate 2s ease forwards 0.4s;
+}
+
+svg path:nth-child(5) {
+  stroke-dasharray: 409;
+  stroke-dashoffset: 409;
+  animation: animate 2s ease forwards 0.2s;
+}
+
+svg path:nth-child(6) {
+  stroke-dasharray: 584;
+  stroke-dashoffset: 584;
+  animation: animate 2s ease forwards 0.1s;
+}
+
+svg path:nth-child(7) {
+  stroke-dasharray: 441;
+  stroke-dashoffset: 441;
+  animation: animate 2s ease forwards 0s;
+}
+
+svg path:nth-child(8) {
+  stroke-dasharray: 439;
+  stroke-dashoffset: 439;
+  animation: animate 2s ease forwards;
+}
+
+@keyframes animate {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill {
+  to {
+    fill: #c07262;
+  }
+}

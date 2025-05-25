@@ -1,13 +1,9 @@
 import { useMemo } from "react";
 import { createTheme, type Theme } from "@mui/material/styles";
-import { useThemeContext } from "../../../contexts/ThemeContext";
-import {
-  responsiveDarkTheme,
-  responsiveLightTheme,
-} from "../../../styles/baseTheme";
+import { useBaseTheme } from "../../../common/hooks/useBaseTheme";
 
 // Function to extend base theme for login-specific styles
-const createLoginTheme = (baseTheme: Theme, mode: "light" | "dark") => {
+const createLoginTheme = (baseTheme: Theme) => {
   return createTheme(baseTheme, {
     palette: {
       primary: {
@@ -15,7 +11,7 @@ const createLoginTheme = (baseTheme: Theme, mode: "light" | "dark") => {
       },
       background: {
         default: baseTheme.palette.background.default,
-        paper: mode === "light" ? "#ffffff" : "#424242",
+        paper: baseTheme.palette.mode === "light" ? "#ffffff" : "#424242",
       },
       text: {
         primary: baseTheme.palette.text.primary,
@@ -62,18 +58,28 @@ const createLoginTheme = (baseTheme: Theme, mode: "light" | "dark") => {
           },
         },
       },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            borderRadius: 16,
+            padding: 32,
+            maxWidth: 400,
+            margin: "auto",
+            width: "100%",
+            [`@media (min-width:600px)`]: {
+              width: "33%",
+            },
+          },
+        },
+      },
     },
   });
 };
 
-// The hook to get the login theme based on the current mode (light/dark)
 export const useLoginTheme = () => {
-  const { mode } = useThemeContext();
+  const baseTheme = useBaseTheme();
 
-  // Use memoization to avoid re-creating the theme on each render
-  return useMemo(() => {
-    const baseTheme =
-      mode === "light" ? responsiveLightTheme : responsiveDarkTheme;
-    return createLoginTheme(baseTheme, mode);
-  }, [mode]);
+  const loginTheme = useMemo(() => createLoginTheme(baseTheme), [baseTheme]);
+
+  return loginTheme;
 };
