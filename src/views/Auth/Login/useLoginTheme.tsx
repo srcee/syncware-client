@@ -64,8 +64,8 @@ const createLoginTheme = (baseTheme: Theme) => {
             borderRadius: 16,
             padding: 32,
             maxWidth: 400,
-            margin: "auto", // center horizontally
-            width: "100%", // default to full width, overridden with container if needed
+            margin: "auto",
+            width: "100%",
             [`@media (min-width:600px)`]: {
               width: "33%",
             },
@@ -76,12 +76,10 @@ const createLoginTheme = (baseTheme: Theme) => {
   });
 };
 
-// The hook to get the login theme based on the current mode (light/dark)
 export const useLoginTheme = () => {
   const baseTheme = useBaseTheme();
 
-  // Use memoization to avoid re-creating the theme on each render
-  return useMemo(() => {
-    return createLoginTheme(baseTheme);
-  }, [baseTheme]);
+  const loginTheme = useMemo(() => createLoginTheme(baseTheme), [baseTheme]);
+
+  return loginTheme;
 };
