@@ -21,7 +21,12 @@ export const ThemeContextProvider: React.FC<{ children: ReactNode }> = ({
   const [mode, setMode] = useState<PaletteMode>(initialMode as PaletteMode);
 
   const toggleTheme = () => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    setMode((prevMode) => {
+      const newMode = prevMode === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newMode);
+
+      return newMode;
+    });
   };
 
   return (

@@ -8,6 +8,8 @@ export enum ColorsPalette {
   GreyText = "#666666",
   LighterGreyText = "#bbbbbb",
   AuroMetalSaurus = "#698684",
+  BaliHai = "#8796A5",
+  DarkOrange = "#c9b902",
 }
 
 export interface Color {
@@ -45,6 +47,14 @@ export const colors: Colors = {
     dark: ColorsPalette.DarkGray,
   },
   footer: {
+    light: ColorsPalette.LightGray,
+    dark: ColorsPalette.DarkGray,
+  },
+  "theme-toggle-track": {
+    light: ColorsPalette.DarkOrange,
+    dark: ColorsPalette.BaliHai,
+  },
+  "theme-toggle-icon": {
     light: ColorsPalette.LightGray,
     dark: ColorsPalette.DarkGray,
   },
